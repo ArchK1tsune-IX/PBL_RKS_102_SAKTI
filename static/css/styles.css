@@ -1,0 +1,51 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.sidebar {
+    height: 100vh;
+    background-color: #3d4d80;
+    color: white;
+    padding: 15px 15px;
+    font-size: 1.2rem;
+}
+
+.sidebar h4 {
+    font-size: 2rem; /* Ukuran font besar */
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+    line-height: 100px;
+    background-color: #3d4d80; 
+    height: 100px;
+}
+
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 20px 15px;
+    display: block;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.sidebar a:hover {
+    background-color: #014bb4;
+}
+
+.logout-link:hover {
+    background-color: #dc3545 !important;
+    color: white;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+#toast-container {
+    position: fixed;
+    top: 1rem; /* Jarak dari atas */
+    right: 1rem; /* Jarak dari kanan */
+    z-index: 1055; /* Pastikan tetap terlihat di atas elemen lain */
+  }
