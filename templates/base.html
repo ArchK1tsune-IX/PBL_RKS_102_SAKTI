@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar d-flex flex-column justify-content-between">
+                <div>
+                    <h4 class="text-center mb-4">S A K T I</h4>
+                    <hr class="bg-light w-100">
+                    <div class="menu-links">
+                        <a href="{{ url_for('dashboard') }}" class="nav-link mb-3"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <a href="{{ url_for('cytix') }}" class="nav-link mb-3"><i class="fas fa-file-alt me-2"></i>Cytix</a>
+                        <a href="{{ url_for('steaky') }}" class="nav-link mb-3"><i class="fas fa-image me-2"></i>Steaky</a>
+                    </div>
+                </div>
+                <div>
+                    <hr class="bg-light w-100">
+                    <a href="{{ url_for('logout') }}" class="nav-link logout-link"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 main-content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Flash Messages Toast -->
+    <div id="toast-container" aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div id="flashToast-{{ loop.index }}" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                <div class="toast-header bg-{{ 'success' if category == 'success' else 'danger' }} text-white">
+                    <strong class="me-auto">SAKTI-BOT</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    {{ message }}
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Navbar for Steganography -->
+ 
+<style>
+    .welcome-section {
+        margin-bottom: 40px;
+    }
+
+    .form-section {
+        margin-top: 40px;
+    }
+
+    .navbar {
+        margin-bottom: 40px;
+        height: 100px; /* Adjust height */
+        border: 1px solid #ccc; /* Add border */
+        background-color: white; /* Change background to white */
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-brand {
+        margin-left: 40px; /* Align text to the left */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2rem; /* Increase font size */
+        font-weight: bold; /* Make text bold */
+        color: #000; /* Change text color to black */
+    }
+    .logo{
+        color: orange;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('steaky') }}">STEAKY</a>
+  </div>
+</nav>
+
+<div class="container">
+    <!-- Welcome Section -->
+    <div class="welcome-section text-center">
+        <h2 class="text">Welcome to <strong class="logo">STEAKY</strong></h2>
+        <h3 class="text">Steganography AES Kriptografy</h3>
+    </div>
+
+    <!-- Form Section -->
+    <div class="card form-section">
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                <!-- Upload File -->
+                <div class="mb-3">
+                    <label for="file" class="form-label">Upload Image File</label>
+                    <input type="file" name="file" class="form-control" id="file" required>
+                </div>
+
+                <!-- Action -->
+                <div class="mb-4">
+                    <label for="action" class="form-label">Action</label>
+                    <select name="action" id="action" class="form-select" required onchange="updateForm()">
+                        <option value="embed_text">Embed Text</option>
+                        <option value="extract_text">Extract Text</option>
+                        <option value="embed_encrypt">Embed and Encrypt</option>
+                        <option value="extract_decrypt">Extract and Decrypt</option>
+                    </select>
+                </div>
+
+                <!-- Conditional Inputs -->
+                <div class="mb-4" id="text-input" style="display: none;">
+                    <label for="text" class="form-label">Text (for Embed)</label>
+                    <input type="text" name="text" class="form-control" id="text" placeholder="Enter text to embed">
+                </div>
+
+                <div class="mb-4" id="key-input" style="display: none;">
+                    <label for="key" class="form-label">Encryption Key (for Encrypt/Decrypt)</label>
+                    <input type="text" name="key" class="form-control" id="key" placeholder="Enter key">
+                </div>
+
+                <div class="mb-4" id="aes-input" style="display: none;">
+                    <label for="aes_type" class="form-label">AES Type</label>
+                    <select name="aes_type" id="aes_type" class="form-select">
+                        <option value="128">AES-128</option>
+                        <option value="256">AES-256</option>
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <!-- Result Section -->
+            {% if result %}
+            <div class="mt-4">
+                <h5>Result:</h5>
+                <textarea class="form-control" rows="4" readonly>{{ result }}</textarea>
+            </div>
+            {% endif %}
+
+            {% if download_path %}
+            <div class="mt-4">
+                <h5>Download Result:</h5>
+                <a href="{{ download_path }}" class="btn btn-success" download>Download</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateForm() {
+        const action = document.getElementById("action").value;
+        const textInput = document.getElementById("text-input");
+        const keyInput = document.getElementById("key-input");
+        const aesInput = document.getElementById("aes-input");
+
+        // Reset visibility
+        textInput.style.display = "none";
+        keyInput.style.display = "none";
+        aesInput.style.display = "none";
+
+        // Update based on action
+        if (action === "embed_text") {
+            textInput.style.display = "block";
+        } else if (action === "embed_encrypt") {
+            textInput.style.display = "block";
+            keyInput.style.display = "block";
+            aesInput.style.display = "block";
+        } else if (action === "extract_decrypt") {
+            keyInput.style.display = "block";
+            aesInput.style.display = "block";
+        }
+    }
+
+    // Initialize form on load
+    document.addEventListener("DOMContentLoaded", updateForm);
+</script>
+
+{% endblock %}

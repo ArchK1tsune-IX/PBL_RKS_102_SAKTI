@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAKTI</title>
+    <style>
+        body {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e1cafa7f;
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+
+        header .logo {
+            position: absolute;
+            left: 30px;
+            font-weight: bold;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1em;
+            padding: 5px 10px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #4a90e2;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            position: absolute;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .auth-buttons .btn-login {
+            text-decoration: none;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+
+        .auth-buttons .btn-login:hover {
+            background-color: #6a7dd3;
+            color: #fff;
+        }
+
+        .auth-buttons .btn-register {
+            text-decoration: none;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745; /* Hijau */
+            transition: all 0.3s ease;
+        }
+
+        .auth-buttons .btn-register:hover {
+            background-color: #4a90e2;
+        }
+
+        .hero {
+            position: relative;
+            text-align: center;
+            color: white;
+            background: url('/static/images/hero.png') no-repeat center center/cover;
+            height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        .hero button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #357ac8;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+            background-color: #f8f4fc;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+            max-width: 1000px;
+            width: 90%;
+        }
+        
+        .content-left {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .content-left img.sakti-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 1px 6px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-left .sakti-caption {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #333;
+        }
+        
+        .content-right {
+            flex: 1;
+            text-align: left;
+            font-size: 1.1em;
+            color: #666;
+        }
+        
+        .content-right h1 {
+            font-size: 2em;
+            color: #333;
+            text-align: left;
+        }
+        
+        .content-right h1 .blue {
+            color: #4a90e2;
+        }
+        
+        .content-right p {
+            margin-top: 20px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+        
+
+        .icon-section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .icon {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            padding: 20px;
+            margin: 10px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            color: #4a90e2;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-section {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .team-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .team-section p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .team-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .team-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .team-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .team-card h3 {
+            font-size: 1.5rem;
+            margin: 1px 0;
+            color: #333;
+        }
+
+        .team-card .role {
+            font-size: 1rem;
+            color: #6b6b6b;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">SAKTI</div>
+        <nav class="navbar">
+            <a href="#">Home</a>
+            <a href="#">About Project</a>
+            <a href="#our-team">Our Team</a>
+        </nav>
+        <div class="auth-buttons">
+            <a href="{{ url_for('login') }}" class="btn-login">Login</a>
+            <a href="{{ url_for('register') }}" class="btn-register">Register</a>
+        </div>
+    </header>
+    
+
+<div class="hero">
+    <div class="hero-content">
+        <h1>Welcome to SAKTI</h1>
+        <p>Sistem Aplikasi Kriptografi dan Steganografi Interaktif</p>
+        <button onclick="window.location.href='{{ url_for('register') }}'">Get Started</button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content-wrapper">
+        <div class="content-left">
+            <img src="/static/images/logo.png" alt="Logo SAKTI" class="sakti-image">
+        </div>
+        <div class="content-right">
+            <h1>Welcome To <span class="blue">PBL RKS-102!</span></h1>
+            <p>SAKTI is a Project Based Learning (PBL) developed by  PBL-RKS102 Team. SAKTI is created with Python Flask, Bootstrap HTML, and MySQL Databases.</p>
+            <p>It is a system that can encrypt/decrypt text and files using classic ciphers. Besides that, you can hide and extract data from image files using modern ciphers.</p></p>
+        </div>
+    </div>
+</div>
+
+
+
+<section class="team-section" id="our-team">
+    <h1>Our Team</h1>
+    <p>Member of PBL RKS-102</p>
+    <div class="team-container">
+        <div class="team-card">
+            <img src="/static/images/reza.JPG" alt="Muhammad Reza Pahlevi">
+            <h3>Muhammad Reza Pahlevi</h3>
+            <p class="role">4332401020</p>
+        </div>
+        <div class="team-card">
+            <img src="/static/images/neza.jpg" alt="Syahneezha Putri Desfranza">
+            <h3>Syahneezha Putri Desfranza</h3>
+            <p class="role">4332401022</p>
+        </div>
+        <div class="team-card">
+            <img src="/static/images/dimas.jpg" alt="Dimaz Zahid Mahawira">
+            <h3>Dimaz Zahid</h3>
+            <h3>Mahawira</h3>
+            <p class="role">4332401032</p>
+        </div>
+    </div>
+</section>
+</body>
+</html>

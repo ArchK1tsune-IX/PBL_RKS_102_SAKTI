@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}Cytix Cipher Tool{% endblock %}
+
+{% block content %}
+    <style>
+        .upload-section {
+            margin-bottom: 20px; /* Menambahkan jarak antar bagian */
+        }
+        .welcome-section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            background-color: #6c41fb; /* Warna biru */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            font-size: 1.1rem;
+            padding: 10px;
+        }
+        textarea {
+            height: 250px; /* Besar untuk input dan result */
+            resize: none;
+        }
+        input[type="text"] {
+            height: 40px; /* Lebih kecil untuk Key */
+        }
+        select {
+            width: 100%;
+            height: 40px;
+            padding: 5px;
+            font-size: 1rem;
+        }
+        .container {
+            max-width: 1500px;
+            margin: auto;
+            padding: 40px;
+        }
+        .box {
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        .file-input {
+            margin-top: -10px;
+        }
+        .navbar {
+            margin-bottom: -10px;
+            height: 100px; /* Adjust height */
+            border: 1px solid #ccc; /* Add border */
+            background-color: white; /* Change background to white */
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand {
+            margin-left: 40px; /* Align text to the left */
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem; /* Increase font size */
+            font-weight: bold; /* Make text bold */
+            color: #000; /* Change text color to black */
+        }
+        .logo {
+            color: rgb(226, 4, 230);
+        }
+    </style>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('steaky') }}">CYTIX</a>
+        </div>
+    </nav>      
+
+    <div class="container">
+        <!-- Welcome Section -->
+        <div class="welcome-section text-center">
+            <h2 class="text">Welcome to <strong class="logo">CYTIX</strong></h2>
+            <h3 class="text">Cryptography Tools File and Text</h3>
+        </div>
+
+        <!-- Form Section -->
+        <form id="cytix-form" method="POST" enctype="multipart/form-data">
+            <div class="row g-4">
+                <!-- File Input Section -->
+                <div class="col-md-12 upload-section">
+                    <div class="section-title">Upload File</div>
+                    <div class="box mt-2">
+                        <input type="file" name="file" class="file-input">
+                    </div>
+                </div>
+
+                <!-- Plaintext Section -->
+                <div class="col-md-4">
+                    <div class="section-title">Plaintext</div>
+                    <div class="box mt-2">
+                        <textarea name="text" placeholder="Enter plaintext here"></textarea>
+                    </div>
+                </div>
+
+                <!-- Cipher Settings Section -->
+                <div class="col-md-4">
+                    <div class="section-title">Cipher Settings</div>
+                    <div class="box mt-2">
+                        <label for="cipher" class="form-label">Select Cipher</label>
+                        <select name="cipher">
+                            <option value="caesar" {% if cipher == "caesar" %}selected{% endif %}>Caesar Cipher</option>
+                            <option value="vigenere" {% if cipher == "vigenere" %}selected{% endif %}>Vigenere Cipher</option>
+                            <option value="transposition" {% if cipher == "transposition" %}selected{% endif %}>Transposition Cipher</option>
+                        </select>
+
+                        <label for="action" class="form-label mt-3">Action</label>
+                        <select name="action">
+                            <option value="Encrypt" {% if action == "Encrypt" %}selected{% endif %}>Encrypt</option>
+                            <option value="Decrypt" {% if action == "Decrypt" %}selected{% endif %}>Decrypt</option>
+                        </select>
+
+                        <label for="key" class="form-label mt-3">Key</label>
+                        <input type="text" name="key" placeholder="Enter key" value="{{ key }}">
+
+                        <button type="submit" class="btn btn-primary mt-3 submit-btn">Submit</button>
+                    </div>
+                </div>
+
+                <!-- Ciphertext Section -->
+                <div class="col-md-4">
+                    <div class="section-title">Result</div>
+                    <div class="box mt-2">
+                        <textarea readonly placeholder="Ciphertext will appear here">{{ result }}</textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Flash Messages Toast -->
+    <div id="toast-container" aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div id="flashToast-{{ loop.index }}" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                <div class="toast-header bg-{{ 'success' if category == 'success' else 'danger' }} text-white">
+                    <strong class="me-auto">SAKTI-BOT</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    {{ message }}
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toastElements = document.querySelectorAll('.toast');
+            toastElements.forEach(toastElement => {
+                const toast = new bootstrap.Toast(toastElement);
+                toast.show();
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<style>
+    .navbar {
+        margin-bottom: -10px;
+        height: 100px; /* Tinggi yang sama dengan Cytix */
+        border: 1px solid #ccc; /* Border abu-abu */
+        background-color: white; /* Warna latar putih */
+        display: flex;
+        align-items: center;
+    }
+    .navbar-brand {
+        margin-left: 40px; /* Posisi logo di kiri */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2rem; /* Ukuran font logo */
+        font-weight: bold; /* Tebalkan logo */
+        color: #000; /* Warna teks hitam */
+    }
+    .logo {
+        color: rgb(226, 4, 230); /* Warna ungu khas Cytix */
+    }
+
+    /* Styling Content */
+    .content-spacing {
+        margin-top: 30px; /* Jarak antara navbar dan konten di bawahnya */
+    }
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    .card img {
+        width: 150px;
+        height: auto;
+        object-fit: cover;
+        margin: 0 auto;
+        display: block;
+    }
+    .user-data-card {
+        margin-top: 40px;
+        margin-bottom: 40px; /* Menambahkan jarak di bawah data pengguna */
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('steaky') }}">DASHBOARD</a>
+    </div>
+</nav> 
+
+<!-- Content -->
+<div class="content-spacing">
+    <div class="welcome-card mb-4">
+        <h4 class="mb-3 text-center">Selamat Datang di Sistem Aplikasi Kriptografi Interaktif Kreativ (SAKTI)</h4>
+    </div>
+
+    <!-- User Data Section -->
+    <div class="card user-data-card p-3">
+        <h4 class="text-center mb-8">Data Pengguna</h4>
+        <hr class="bg-light">
+        <div class="row align-items-center">
+            <div class="col-md-3 text-center">
+                <img src="/static/images/dashboard.png" alt="Avatar" class="avatar" style="width: 200px; height: auto; object-fit: cover;">
+            </div>
+            <div class="col-md-9">
+                <p><strong>ID:</strong> {{ current_user.id }}</p>
+                <p><strong>Username:</strong> {{ current_user.username }}</p>
+                <p><strong>Email:</strong> {{ current_user.email }}</p>
+                <p><strong>Joined At:</strong> {{ current_user.created_at.strftime('%d %B %Y, %H:%M') }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Card Cytix -->
+        <div class="col-md-6 mb-8">
+            <div class="card text-center">
+                <img src="/static/images/cytix.jpg" class="card-img-top" alt="Cytix Image">
+                <div class="card-body">
+                    <h5 class="card-title">Cytix</h5>
+                    <p class="card-text">Tools untuk enkripsi dan dekripsi file dan text menggunakan kriptografi klasik</p>
+                    <a href="/cytix" class="btn btn-primary">Lihat Cytix</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Steaky -->
+        <div class="col-md-6 mb-8">
+            <div class="card text-center">
+                <img src="/static/images/steaky.png" class="card-img-top" alt="Steaky Image">
+                <div class="card-body">
+                    <h5 class="card-title">Steaky</h5>
+                    <p class="card-text">Tools Penyembunyian dan Pencarian data pada gambar menggunakan kriptografi modern</p>
+                    <a href="/steaky" class="btn btn-primary">Lihat Steaky</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
