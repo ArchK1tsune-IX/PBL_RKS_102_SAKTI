@@ -70,7 +70,7 @@ This project is a web-based application developed using Python with a MySQL data
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/your-username/your-repository.git](https://github.com/ArchK1tsune-IX/PBL_RKS_102_SAKTI)
+   git clone [https://github.com/ArchK1tsune-IX/PBL_RKS_102_SAKTI]
    ```
 2. Navigate to the project directory:
    ```bash
